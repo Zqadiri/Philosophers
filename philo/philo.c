@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 18:54:27 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/29 17:52:47 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/29 19:59:36 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,49 +20,14 @@
 int	get_args(t_philo *philo, char **args)
 {
 	philo->np = atoi(args[1]);
-	philo->tt_die = atoi(args[2]);
-	philo->tt_eat = atoi(args[3]);
-	philo->tt_sleep = atoi(args[4]);
+	philo->time_to_die = atoi(args[2]) * 1000;
+	philo->time_to_eat = atoi(args[3]) * 1000;
+	philo->time_to_sleep = atoi(args[4]) * 1000;
 	if (args[5] != NULL)
 		philo->np = atoi(args[1]);
-	return (1);
-}
-
-int counter;
-
-void* trythis(void* arg)
-{
-    (void)arg;
-	unsigned long i = 0;
-	counter += 1;
-	printf("\n Job %d has started\n", counter);
-
-	for (i = 0; i < (0xFFFFFFFF); i++)
-		;
-	printf("\n Job %d has finished\n", counter);
-	return NULL;
-}
-
-int		set_threads(t_philo *philo)
-{
-	
-	int			error;
-	pthread_t	tid[philo->np];
-	int			i;
-
-	i = 0;
-	while (i < philo->np)
-	{
-		error = pthread_create(&(tid[i]), NULL, &trythis, NULL);
-		// pthread_join(tid[i], NULL);
-		i++;
-	}
-	i = 0;
-	while(i < philo->np)
-	{
-		pthread_join(tid[i], NULL);
-		i++;
-	}
+    philo->tid = (pthread_t *)malloc(philo->np * sizeof(pthread_t));
+	if ( philo->tid == NULL)
+		return (0);
 	return (1);
 }
 
@@ -79,10 +44,9 @@ int     main(int argc, char *argv[])
 			return (0);
 		if (!get_args(&philo, argv))
 			return (0);
-    	print_args(&philo, &state);
-		
-		// if (!set_threads(&philo, &state))
-		// 	return (0);
+    	print_args(&philo, &state);		
+		if (!create_threads(&philo))
+			exit_error();
 	}
 	return (1);
 }

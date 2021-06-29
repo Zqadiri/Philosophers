@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/28 11:05:48 by zqadiri           #+#    #+#              #
-#    Updated: 2021/06/29 16:56:50 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/06/29 20:00:31 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,10 +25,11 @@ CC	= gcc
 
 RM = rm -f
 
-CMPL = 	-Wall -Werror -Wextra 
+CMPL = 	-Wall -Werror -Wextra  -fsanitize=address -g
 
 SRCS =	init.c\
-		philo.c\
+		launch.c\
+		philo.c
 
 OBJS = $(SRCS:.c=.o)
 all:   $(NAME)
