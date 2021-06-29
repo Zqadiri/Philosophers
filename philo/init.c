@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 16:55:35 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/29 19:45:43 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/29 20:35:29 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	init(t_philo *philo, t_state *state)
 	philo->time_to_eat = 0;
 	philo->time_to_sleep = 0;
 	philo->nb_must_eat = 0;
+    philo->is_done = 0;
+    philo->is_dead = 0;
     gettimeofday(&current_time, NULL);
     state->time_start = current_time.tv_usec;
 	return (1);

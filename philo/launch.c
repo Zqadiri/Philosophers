@@ -6,20 +6,32 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:49:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/29 20:05:09 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/29 20:37:22 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "philo.h"
 
-void    *philosopher(void *args)
+void    *philosopher(void *arg)
 {
+	t_args	*args;
+	int		philo_id;
+	t_philo	*philo;
+
+	args = (t_args *)arg;
+	philo_id = args->philo_id;
+	philo = args->philo;
+	if (!philo->is_dead && !philo->is_done)
+	{
+		// functions 
+	}
 	return (args);
 }
 
 void    exit_error(void)
 {
-	// destroy threads
+	// destroy mutex
+	// detach threads
 	exit(EXIT_FAILURE);
 }
 
@@ -31,7 +43,6 @@ static  void    create_supervisor(t_philo *philo)
 
 int		create_threads(t_philo *philo)
 {
-	// int			error;
 	int			i;
 	t_args		*args;
 

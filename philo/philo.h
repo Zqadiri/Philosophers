@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 10:01:56 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/29 20:02:56 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/29 20:35:07 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,17 @@ typedef struct s_state
 
 typedef struct s_philo
 {
-	pthread_t	*tid;
-	pthread_t	sup;
-	int			np;         // ! also the number of forks
-	size_t		time_to_die;   
-	size_t		time_to_eat;     // ! in milliseconds 
-	size_t		time_to_sleep;
-	int			nb_must_eat; // ! optional
+	int					is_dead;
+	int					is_done;
+	pthread_t			*tid;
+	pthread_t			sup;
+	pthread_mutex_t		protect_forks;		
+	pthread_mutex_t		protect_write;		// ! synchronize access to memory
+	int					np;         		// ! also the number of forks
+	size_t				time_to_die;   
+	size_t				time_to_eat;     	// ! in milliseconds 
+	size_t				time_to_sleep;
+	int					nb_must_eat; 		// ! optional
 }   t_philo;
 
 typedef struct s_args
