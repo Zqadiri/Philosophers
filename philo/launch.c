@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:49:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/30 17:24:29 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/30 20:36:26 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void    *philosopher(void *arg)
 		take_forks(args);
 		start_eat(args);
 		go_to_sleep(args);
-		// think(arg);
+		think(arg);
 	}
-	return (args);
+	return (NULL);
 }
 
 void    exit_error(void)
@@ -62,12 +62,12 @@ int		create_threads(t_philo *philo)
 	}
 	if (pthread_join(philo->sup, NULL))
 			return (0);
-	// i = 0;
-	// while(i < philo->np)
-	// {
-	// 	if (pthread_join(philo->tid[i], NULL))
-	// 		return (0);
-	// 	i++;
-	// }
+	i = 0;
+	while(i < philo->np)
+	{
+		if (pthread_join(philo->tid[i], NULL))
+			return (0);
+		i++;
+	}
 	return (1);
 }

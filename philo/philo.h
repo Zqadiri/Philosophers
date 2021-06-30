@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 10:01:56 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/30 16:44:37 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/30 20:34:17 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,7 @@ void	print_state(int state, t_args *data);
 void	take_forks(t_args *data);
 void	start_eat(t_args *data);
 void	go_to_sleep(t_args *data);
+void	think(t_args *data);
+void	_do(size_t time_to_eat);
 
 #endif

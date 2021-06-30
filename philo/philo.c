@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 18:54:27 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/30 16:30:46 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/30 20:15:55 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ int	get_args(t_philo *philo, char **args)
 	philo->time_to_eat = atoi(args[3]) * 1000;
 	philo->time_to_sleep = atoi(args[4]) * 1000;
 	if (args[5] != NULL)
-		philo->np = atoi(args[1]);
+		philo->nb_must_eat = atoi(args[5]);
+	else
+		philo->nb_must_eat = -1;
     philo->tid = (pthread_t *)malloc(philo->np * sizeof(pthread_t));
 	if ( philo->tid == NULL)
 		return (0);
