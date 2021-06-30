@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 16:55:35 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/30 15:20:21 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/30 16:17:54 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	print_args(t_philo *philo)
 {
-	printf ("%d\n", philo->np);
-	printf ("%zu\n", philo->time_to_die);
-	printf ("%zu\n", philo->time_to_eat);
-	printf ("%zu\n", philo->time_to_sleep);
-	printf ("%d\n", philo->nb_must_eat);
+	printf (" philo->np :%d\n", philo->np);
+	printf ("philo->time_to_die %zu\n", philo->time_to_die);
+	printf (" philo->time_to_eat %zu\n", philo->time_to_eat);
+	printf ("philo->time_to_sleep %zu\n", philo->time_to_sleep);
+	printf ("philo->nb_must_eat %d\n", philo->nb_must_eat);
 	// printf ("time_start : %ld\n", state->time_start);
 }
 

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:49:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/30 15:06:46 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/30 16:38:14 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ int		create_threads(t_philo *philo)
 	}
 	if (pthread_join(philo->sup, NULL))
 			return (0);
-	i = 0;
-	while(i < philo->np)
-	{
-		if (pthread_join(philo->tid[i], NULL))
-			return (0);
-		i++;
-	}
+	// i = 0;
+	// while(i < philo->np)
+	// {
+	// 	if (pthread_join(philo->tid[i], NULL))
+	// 		return (0);
+	// 	i++;
+	// }
 	return (1);
 }
