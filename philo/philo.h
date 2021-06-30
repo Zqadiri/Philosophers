@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 10:01:56 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/29 20:35:07 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/30 12:42:05 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define EAT	1
 # define SLEEP	2
 # define DIE	4
+# define TAKE_FORK 	5
 
 typedef struct s_state
 {
@@ -38,7 +39,8 @@ typedef struct s_philo
 	int					is_done;
 	pthread_t			*tid;
 	pthread_t			sup;
-	pthread_mutex_t		protect_forks;		
+	pthread_mutex_t		protect_forks;
+	pthread_mutex_t		*forks;
 	pthread_mutex_t		protect_write;		// ! synchronize access to memory
 	int					np;         		// ! also the number of forks
 	size_t				time_to_die;   
@@ -59,5 +61,7 @@ void	print_args(t_philo *philo, t_state *state);
 int		create_threads(t_philo *philo);
 void    *philosopher(void *args);
 void    exit_error(void);
+
+void	take_forks(t_args *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 18:54:27 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/29 20:17:26 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/30 12:33:19 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	get_args(t_philo *philo, char **args)
 	if ( philo->tid == NULL)
 		return (0);
 	pthread_mutex_init(&(philo->protect_forks), NULL);
+	pthread_mutex_init((philo->forks), NULL);
+	philo->forks = (pthread_mutex_t *)malloc(philo->np * sizeof(pthread_mutex_t));
 	return (1);
 }
 
