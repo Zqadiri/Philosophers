@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 18:54:27 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/30 20:15:55 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/30 20:56:20 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,25 @@ int	get_args(t_philo *philo, char **args)
 		return (0);
 	pthread_mutex_init(&(philo->protect_forks), NULL);
 	pthread_mutex_init(&(philo->protect_write), NULL);
-	pthread_mutex_init(&(philo->is_eating), NULL);
+	// pthread_mutex_init(&(philo->is_eating), NULL);
+	philo->is_eating = (pthread_mutex_t *)malloc(philo->np * sizeof(pthread_mutex_t));
 	philo->forks = (pthread_mutex_t *)malloc(philo->np * sizeof(pthread_mutex_t));
 	philo->times_philo_ate = (int *)malloc(philo->np * sizeof(int));
 	memset(philo->times_philo_ate, 0, philo->np);
+	return (1);
+}
+
+int		init_mutexes(t_philo *philo)
+{
+	int	i;
+
+	i = 0;
+	while (i < philo->np)
+	{
+		pthread_mutex_init(&(philo->is_eating[i]), NULL);
+		pthread_mutex_init(&(philo->forks[i]), NULL);
+		i++;
+	}
 	return (1);
 }
 
@@ -50,6 +65,8 @@ int     main(int argc, char *argv[])
 		if (!init(&philo))
 			return (0);
 		if (!get_args(&philo, argv))
+			return (0);
+		if (!init_mutexes(&philo))
 			return (0);
     	print_args(&philo);		
 		if (!create_threads(&philo))

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 10:01:56 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/30 20:34:17 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/30 20:40:59 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_philo
 	pthread_t			*tid;
 	pthread_t			sup;
 	pthread_mutex_t		protect_forks;
-	pthread_mutex_t		is_eating;
+	pthread_mutex_t		*is_eating;
 	pthread_mutex_t		*forks;
 	pthread_mutex_t		protect_write;		// ! synchronize access to memory
 	int					np;         		// ! also the number of forks

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 12:13:46 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/30 20:35:54 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/30 20:43:50 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,15 @@ void	take_forks(t_args *data)
 	if (philo_id % 2 != 0)
 	{
 		pthread_mutex_lock(&(philo->forks[(philo_id + 1) % 2]));
-		print_state(TAKE_FORK, data);
 		pthread_mutex_lock(&(philo->forks[philo_id]));
+		print_state(TAKE_FORK, data);
 		print_state(TAKE_FORK, data);
 	}
 	else
 	{
 		pthread_mutex_lock(&(philo->forks[philo_id]));
-		print_state(TAKE_FORK, data);
 		pthread_mutex_lock(&(philo->forks[(philo_id + 1) % 2]));
+		print_state(TAKE_FORK, data);
 		print_state(TAKE_FORK, data);
 	}
 }
