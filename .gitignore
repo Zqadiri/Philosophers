@@ -1,6 +1,8 @@
 # Prerequisites
 *.d
-
+a.out
+main.c
+*.dSYM
 # Object files
 *.o
 *.ko
