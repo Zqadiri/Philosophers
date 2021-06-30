@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 12:28:24 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/30 16:39:20 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/30 17:17:14 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	is_eating(size_t time_to_eat)
 {
-    struct timeval	tv1;
-    struct timeval	tv2;
+	struct timeval	tv1;
+	struct timeval	tv2;
 	int				not_done;
 	int				eating;
 
@@ -37,22 +37,17 @@ void	is_eating(size_t time_to_eat)
 			// not_done = 0;
 			break;
 		}
-		usleep(50);
 	}
 }
 
 void	start_eat(t_args *data)
 {
-	int		philo_id;
-	t_philo	*philo;
-
-	philo_id = data->philo_id;
-	philo = data->philo;
 	pthread_mutex_lock(&(data->philo->is_eating));
-    print_state(EAT, data);
-	is_eating(philo->time_to_eat);
+	print_state(EAT, data);
+	is_eating(data->philo->time_to_eat);
 	// ! abort
 	// philo->times_philo_ate[philo_id]++;
-	// * unlock forks
-	pthread_mutex_unlock(&(data->philo->is_eating));
+	// pthread_mutex_unlock(&(data->philo->forks[(data->philo_id + 1) % 2]));
+	// pthread_mutex_unlock(&(data->philo->forks[data->philo_id]));
+   	pthread_mutex_unlock(&(data->philo->is_eating));
 }

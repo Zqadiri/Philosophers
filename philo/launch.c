@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:49:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/30 16:38:14 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/30 17:24:29 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ void    *philosopher(void *arg)
 	args = (t_args *)arg;
 	philo_id = args->philo_id;
 	philo = args->philo;
-	if (!philo->is_dead && !philo->is_done)
+	while (!philo->is_dead && !philo->is_done)
 	{
 		take_forks(args);
 		start_eat(args);
-		// go_to_sleep(arg);
+		go_to_sleep(args);
 		// think(arg);
 	}
 	return (args);

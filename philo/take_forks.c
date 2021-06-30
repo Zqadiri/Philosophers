@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 12:13:46 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/30 15:55:47 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/30 17:04:22 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	print_state(int state, t_args *data)
 		printf(" %d has taken a fork\n", data->philo_id + 1);
 	if (state == EAT)
 		printf(" %d is eating\n", data->philo_id + 1);
+	if (state == SLEEP)
+		printf(" %d is sleeping\n", data->philo_id + 1);
 	pthread_mutex_unlock(&(data->philo->protect_write));
 }
 
