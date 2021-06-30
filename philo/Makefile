@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/28 11:05:48 by zqadiri           #+#    #+#              #
-#    Updated: 2021/06/30 12:32:36 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/06/30 15:20:41 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ CMPL = 	-Wall -Werror -Wextra  -fsanitize=address -g
 SRCS =	init.c\
 		launch.c\
 		take_forks.c\
+		start_eat.c\
 		philo.c
 
 OBJS = $(SRCS:.c=.o)

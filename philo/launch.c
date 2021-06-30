@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:49:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/30 12:36:18 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/30 15:06:46 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void    *philosopher(void *arg)
 	if (!philo->is_dead && !philo->is_done)
 	{
 		take_forks(args);
-		// start_eat(arg);
+		start_eat(args);
 		// go_to_sleep(arg);
 		// think(arg);
 	}
