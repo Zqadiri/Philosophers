@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 18:54:27 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/30 20:56:20 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/30 21:27:52 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,19 @@ int	get_args(t_philo *philo, char **args)
     philo->tid = (pthread_t *)malloc(philo->np * sizeof(pthread_t));
 	if ( philo->tid == NULL)
 		return (0);
-	pthread_mutex_init(&(philo->protect_forks), NULL);
-	pthread_mutex_init(&(philo->protect_write), NULL);
-	// pthread_mutex_init(&(philo->is_eating), NULL);
 	philo->is_eating = (pthread_mutex_t *)malloc(philo->np * sizeof(pthread_mutex_t));
+	if (philo->is_eating == NULL)
+		return (0);
 	philo->forks = (pthread_mutex_t *)malloc(philo->np * sizeof(pthread_mutex_t));
+	if (philo->forks == NULL)
+		return (0);
 	philo->times_philo_ate = (int *)malloc(philo->np * sizeof(int));
+	if (philo->times_philo_ate == NULL)
+		return (0);
 	memset(philo->times_philo_ate, 0, philo->np);
+	philo->timestamp = (long*)malloc(philo->np * sizeof(long));
+	if (philo->timestamp == NULL)
+		return (0);
 	return (1);
 }
 
@@ -47,10 +53,14 @@ int		init_mutexes(t_philo *philo)
 	i = 0;
 	while (i < philo->np)
 	{
+		philo->timestamp[i] = calculate_timestamp();
 		pthread_mutex_init(&(philo->is_eating[i]), NULL);
 		pthread_mutex_init(&(philo->forks[i]), NULL);
 		i++;
 	}
+	pthread_mutex_init(&(philo->protect_forks), NULL);
+	pthread_mutex_init(&(philo->protect_write), NULL);
+	philo->time_start = calculate_timestamp();
 	return (1);
 }
 

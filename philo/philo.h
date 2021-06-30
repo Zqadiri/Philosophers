@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 10:01:56 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/30 20:40:59 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/30 21:26:58 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define THINK	0
 # define EAT	1
 # define SLEEP	2
-# define DIE	4
+# define DIED	4
 # define TAKE_FORK 	5
 # define TO_MICRO	1000000
 
@@ -45,6 +45,8 @@ typedef struct s_philo
 	size_t				time_to_sleep;
 	int					nb_must_eat; 		// ! optional
 	int					*times_philo_ate;
+	long				*timestamp;
+	int					time_start;
 }   t_philo;
 
 typedef struct s_args
@@ -59,6 +61,7 @@ void	print_args(t_philo *philo);
 int		create_threads(t_philo *philo);
 void    *philosopher(void *args);
 void    exit_error(void);
+int		calculate_timestamp(void);
 
 void	print_state(int state, t_args *data);
 void	take_forks(t_args *data);

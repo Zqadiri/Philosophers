@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 12:13:46 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/30 20:43:50 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/06/30 21:11:59 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	print_state(int state, t_args *data)
 		printf(" %d is sleeping\n", data->philo_id + 1);
 	if (state == THINK)
 		printf(" %d is thinking\n", data->philo_id + 1);
+	if (state == DIED)
+		printf(" %d died\n", data->philo_id + 1);
 	pthread_mutex_unlock(&(data->philo->protect_write));
 }
 
