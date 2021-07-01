@@ -58,7 +58,7 @@ int		init_mutexes(t_philo *philo)
 		pthread_mutex_init(&(philo->forks[i]), NULL);
 		i++;
 	}
-	pthread_mutex_init(&(philo->protect_forks), NULL);
+	// pthread_mutex_init(&(philo->protect_forks), NULL);
 	pthread_mutex_init(&(philo->protect_write), NULL);
 	philo->time_start = calculate_timestamp();
 	return (1);

@@ -27,13 +27,11 @@ void	_do(size_t time_to_eat)
 		eating = time_to_eat - (((tv2.tv_sec * TO_MICRO) - (tv1.tv_sec * TO_MICRO))
 		+ (tv2.tv_usec - tv2.tv_usec));
 		if (eating < 0)
-			not_done = 0;
-			// break;
+			break;
 		if (eating > 0)
 		{
 			not_done = 0;
 			usleep(eating);
-			// break;
 		}
 		usleep(50);
 	}
