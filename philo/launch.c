@@ -40,6 +40,12 @@ void    *supervisor(void *arg)
 	args = (t_args *)arg;
 	philo_id = args->philo_id;
 	philo = args->philo;
+	// while (!philo->is_dead && !philo->is_done)
+	// {
+	// 	pthread_mutex_lock(&(philo->protect_write));
+	// 	printf ("%d\n", args->philo_id);
+	// 	pthread_mutex_unlock(&(philo->protect_write));
+	// }
 	return (NULL);
 }
 
@@ -50,9 +56,9 @@ void    exit_error(void)
 	exit(EXIT_FAILURE);
 }
 
-static  void    create_supervisor(t_philo *philo)
+static  void    create_supervisor(t_args *arg)
 {
-	if (pthread_create(&(philo->sup), NULL, &supervisor, (void *)philo))
+	if (pthread_create(&(arg->philo->sup), NULL, &supervisor, (void *)arg))
 		exit_error();
 }
 
@@ -62,7 +68,7 @@ int		create_threads(t_philo *philo)
 	t_args		*args;
 
 	i = 0;
-	create_supervisor(philo);
+	args = NULL;
 	while (i < philo->np)
 	{
 		args = (t_args *)malloc(sizeof(t_args));
@@ -72,6 +78,7 @@ int		create_threads(t_philo *philo)
 			return (0);
 		i++;
 	}
+	create_supervisor(args);
 	if (pthread_join(philo->sup, NULL))
 			return (0);
 	i = 0;

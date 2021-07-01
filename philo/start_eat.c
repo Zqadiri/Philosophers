@@ -39,10 +39,15 @@ void	_do(size_t time_to_eat)
 
 void	start_eat(t_args *data)
 {
-	pthread_mutex_lock(&(data->philo->is_eating[data->philo_id]));
+	int		philo_id;
+	t_philo	*philo;
+
+	philo_id = data->philo_id;
+	philo = data->philo;
+	pthread_mutex_lock(&(philo->is_eating[philo_id]));
 	print_state(EAT, data);
-	_do(data->philo->time_to_eat);
+	_do(philo->time_to_eat);
 	// ! abort
-	// philo->times_philo_ate[philo_id]++;
-	pthread_mutex_unlock(&(data->philo->is_eating[data->philo_id]));
+	philo->times_philo_ate[philo_id]++;
+	pthread_mutex_unlock(&(philo->is_eating[philo_id]));
 }

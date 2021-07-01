@@ -56,10 +56,8 @@ void	take_forks(t_args *data)
 	{
 		pthread_mutex_lock(&(philo->forks[(philo_id + 1) % 2]));
 		print_state(TAKE_FORK, data);
-
 		pthread_mutex_lock(&(philo->forks[philo_id]));
 		print_state(TAKE_FORK, data);
-
 	}
 	else
 	{
@@ -67,7 +65,6 @@ void	take_forks(t_args *data)
 		pthread_mutex_lock(&(philo->forks[(philo_id + 1) % 2]));
 		print_state(TAKE_FORK, data);
 		print_state(TAKE_FORK, data);
-
 	}
 	// pthread_mutex_unlock(&(data->philo->protect_forks));
 }
