@@ -31,6 +31,18 @@ void    *philosopher(void *arg)
 	return (NULL);
 }
 
+void    *supervisor(void *arg)
+{
+	t_args	*args;
+	int		philo_id;
+	t_philo	*philo;
+
+	args = (t_args *)arg;
+	philo_id = args->philo_id;
+	philo = args->philo;
+	return (NULL);
+}
+
 void    exit_error(void)
 {
 	// destroy mutex
@@ -40,7 +52,7 @@ void    exit_error(void)
 
 static  void    create_supervisor(t_philo *philo)
 {
-	if (pthread_create(&(philo->sup), NULL, &philosopher, (void *)philo))
+	if (pthread_create(&(philo->sup), NULL, &supervisor, (void *)philo))
 		exit_error();
 }
 
