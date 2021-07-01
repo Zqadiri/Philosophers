@@ -35,7 +35,7 @@ typedef struct s_philo
 	int					is_done;
 	pthread_t			*tid;
 	pthread_t			sup;
-	pthread_mutex_t		protect_forks;
+	// pthread_mutex_t		protect_forks;
 	pthread_mutex_t		*is_eating;
 	pthread_mutex_t		*forks;
 	pthread_mutex_t		protect_write;		// ! synchronize access to memory

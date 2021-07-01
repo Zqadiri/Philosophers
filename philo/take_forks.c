@@ -24,8 +24,13 @@ int	calculate_timestamp(void)
 
 void	print_state(int state, t_args *data)
 {
+	int	diff;
+	int now;
+
 	pthread_mutex_lock(&(data->philo->protect_write));
-	printf("%d", calculate_timestamp());
+	now = calculate_timestamp();
+	diff = now - data->philo->time_start;
+	printf("%d", diff);
 	if (state == TAKE_FORK)
 		printf(" %d has taken a fork\n", data->philo_id + 1);
 	if (state == EAT)
@@ -46,12 +51,15 @@ void	take_forks(t_args *data)
 
 	philo_id = data->philo_id;
 	philo = data->philo;
+	// pthread_mutex_lock(&(data->philo->protect_forks));
 	if (philo_id % 2 != 0)
 	{
 		pthread_mutex_lock(&(philo->forks[(philo_id + 1) % 2]));
+		print_state(TAKE_FORK, data);
+
 		pthread_mutex_lock(&(philo->forks[philo_id]));
 		print_state(TAKE_FORK, data);
-		print_state(TAKE_FORK, data);
+
 	}
 	else
 	{
@@ -59,5 +67,7 @@ void	take_forks(t_args *data)
 		pthread_mutex_lock(&(philo->forks[(philo_id + 1) % 2]));
 		print_state(TAKE_FORK, data);
 		print_state(TAKE_FORK, data);
+
 	}
+	// pthread_mutex_unlock(&(data->philo->protect_forks));
 }

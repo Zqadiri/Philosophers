@@ -78,7 +78,7 @@ int     main(int argc, char *argv[])
 			return (0);
 		if (!init_mutexes(&philo))
 			return (0);
-    	print_args(&philo);		
+    	// print_args(&philo);		
 		if (!create_threads(&philo))
 			exit_error();
 	}
