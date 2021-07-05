@@ -40,7 +40,11 @@ void	print_state(int state, t_args *data)
 	if (state == THINK)
 		printf(" %d is thinking\n", data->philo_id + 1);
 	if (state == DIED)
+	{
 		printf(" %d died\n", data->philo_id + 1);
+	}
+	if (state == DONE)
+		printf("DONE\n");
 	pthread_mutex_unlock(&(data->philo->protect_write));
 }
 

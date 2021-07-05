@@ -48,6 +48,7 @@ void	start_eat(t_args *data)
 	print_state(EAT, data);
 	_do(philo->time_to_eat);
 	// ! abort
+	philo->timestamp[philo_id] = calculate_timestamp();
 	philo->times_philo_ate[philo_id]++;
 	pthread_mutex_unlock(&(philo->is_eating[philo_id]));
 }
