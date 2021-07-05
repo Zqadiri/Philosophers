@@ -40,9 +40,9 @@ typedef struct s_philo
 	pthread_mutex_t		*forks;
 	pthread_mutex_t		protect_write;		// ! synchronize access to memory
 	int					np;         		// ! also the number of forks
-	size_t				time_to_die;   
-	size_t				time_to_eat;     	// ! in milliseconds 
-	size_t				time_to_sleep;
+	int					time_to_die;   
+	int					time_to_eat;     	// ! in milliseconds 
+	int					time_to_sleep;
 	int					nb_must_eat; 		// ! optional
 	int					*times_philo_ate;
 	long				*timestamp;
@@ -57,12 +57,11 @@ typedef struct s_args
 
 int		init(t_philo *philo);
 void	print_args(t_philo *philo);
-
+long long	calculate_timestamp(void);
 int		create_threads(t_philo *philo);
 void    *philosopher(void *args);
 void    exit_error(void);
-int		calculate_timestamp(void);
-
+// int		calculate_timestamp(void);
 void	print_state(int state, t_args *data);
 void	take_forks(t_args *data);
 void	start_eat(t_args *data);

@@ -20,9 +20,9 @@
 int	get_args(t_philo *philo, char **args)
 {
 	philo->np = atoi(args[1]);
-	philo->time_to_die = atoi(args[2]) * 1000; // ? micro
-	philo->time_to_eat = atoi(args[3]) * 1000;
-	philo->time_to_sleep = atoi(args[4]) * 1000;
+	philo->time_to_die = atoi(args[2]); // ? milli
+	philo->time_to_eat = atoi(args[3]);
+	philo->time_to_sleep = atoi(args[4]);
 	if (args[5] != NULL)
 		philo->nb_must_eat = atoi(args[5]);
 	else

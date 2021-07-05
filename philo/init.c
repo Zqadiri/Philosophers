@@ -12,14 +12,14 @@
 
 # include "philo.h"
 
-void	print_args(t_philo *philo)
-{
-	printf ("philo->np :%d\n", philo->np);
-	printf ("philo->time_to_die %zu\n", philo->time_to_die);
-	printf ("philo->time_to_eat %zu\n", philo->time_to_eat);
-	printf ("philo->time_to_sleep %zu\n", philo->time_to_sleep);
-	printf ("philo->nb_must_eat %d\n", philo->nb_must_eat);
-}
+// void	print_args(t_philo *philo)
+// {
+// 	printf ("philo->np :%d\n", philo->np);
+// 	printf ("philo->time_to_die %zu\n", philo->time_to_die);
+// 	printf ("philo->time_to_eat %zu\n", philo->time_to_eat);
+// 	printf ("philo->time_to_sleep %zu\n", philo->time_to_sleep);
+// 	printf ("philo->nb_must_eat %d\n", philo->nb_must_eat);
+// }
 
 int	init(t_philo *philo)
 {

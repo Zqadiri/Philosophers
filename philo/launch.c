@@ -90,23 +90,25 @@ void	check_done(t_args	*arg)
 
 void	check_death(t_args	*arg)
 {
-	struct timeval 	tv_now;
-	int				time_now;
 	int				i;
-	size_t			diff;
+	long long			diff;
 
 	i = 0;
-	gettimeofday(&tv_now, NULL);
-	time_now = ((tv_now.tv_sec * 1000) + (tv_now.tv_usec / 1000));
 	while (i < arg->philo->np)
 	{
-		diff = time_now - arg->philo->timestamp[arg->philo_id];
+		pthread_mutex_lock(&(arg->philo->is_eating[arg->philo_id]));
+		diff = calculate_timestamp() - arg->philo->timestamp[i];
+		pthread_mutex_lock(&(arg->philo->protect_write));
+		printf ("\nphilo %d: %lld - %ld = %lld\n", i + 1, calculate_timestamp(), arg->philo->timestamp[i], diff);
+		pthread_mutex_unlock(&(arg->philo->protect_write));
 		if (diff > arg->philo->time_to_die)
 		{
-			print_state(DIED, arg);
+			printf("PHILO %d: DIED\n", i + 1);
 			// detach_philo(arg);
+			arg->philo->is_dead = 1;
 			exit (0);
 		}
+		pthread_mutex_unlock(&(arg->philo->is_eating[arg->philo_id]));
 		i++;
 	}
 }
@@ -128,10 +130,25 @@ void    *supervisor(void *arg)
 	return (NULL);
 }
 
+// void    *supervisor_2(void *arg)
+// {
+// 	t_args	*args;
+// 	int		philo_id;
+// 	t_philo	*philo;
+
+// 	args = (t_args *)arg;
+// 	philo_id = args->philo_id;
+// 	philo = args->philo;
+// 	while (!philo->is_dead && !philo->is_done)
+// 		check_death(args);
+// 	return (NULL);
+// }
+
 int		create_threads(t_philo *philo)
 {
 	int			i;
 	t_args		*args;
+	// pthread_t			sup_2;
 
 	i = 0;
 	args = NULL;
@@ -146,6 +163,8 @@ int		create_threads(t_philo *philo)
 	}
 	if (pthread_create(&(philo->sup), NULL, supervisor, (void *)args))
 		exit_error();
+	// if (pthread_create(&(sup_2), NULL, supervisor_2, (void *)args))
+	// 	exit_error();
 	i = 0;
 	while(i < philo->np)
 	{
@@ -155,5 +174,7 @@ int		create_threads(t_philo *philo)
 	}
 	if (pthread_join(philo->sup, NULL))
 		return (0);
+	// if (pthread_join(sup_2, NULL))
+	// 	return (0);
 	return (1);
 }
