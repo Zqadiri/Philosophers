@@ -35,7 +35,6 @@ void	_do(size_t time_to_eat)
 		}
 	}
 		usleep(50);
-
 }
 
 void	start_eat(t_args *data)
@@ -48,6 +47,7 @@ void	start_eat(t_args *data)
 	pthread_mutex_lock(&(philo->is_eating[philo_id]));
 	print_state(EAT, data);
 	philo->timestamp[philo_id] = calculate_timestamp();
+	philo->death_time[philo_id] = philo->timestamp[philo_id] + philo->time_to_die;
 	philo->times_philo_ate[philo_id]++;
 	// _do(philo->time_to_eat);
 	usleep(philo->time_to_eat * 1000);

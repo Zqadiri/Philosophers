@@ -38,6 +38,7 @@ typedef struct s_philo
 	pthread_t			sup;
 	pthread_mutex_t		*is_eating;
 	pthread_mutex_t		*forks;
+	pthread_mutex_t		mutex;
 	pthread_mutex_t		protect_write;		// ! synchronize access to memory
 	int					np;         		// ! also the number of forks
 	int					time_to_die;   
@@ -46,6 +47,7 @@ typedef struct s_philo
 	int					nb_must_eat; 		// ! optional
 	int					*times_philo_ate;
 	long				*timestamp;
+	long				*death_time;
 	int					time_start;
 }   t_philo;
 

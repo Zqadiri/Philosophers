@@ -98,9 +98,9 @@ void	check_death(t_args	*arg)
 	{
 		pthread_mutex_lock(&(arg->philo->is_eating[arg->philo_id]));
 		diff = calculate_timestamp() - arg->philo->timestamp[i];
-		pthread_mutex_lock(&(arg->philo->protect_write));
-		printf ("\nphilo %d: %lld - %ld = %lld\n", i + 1, calculate_timestamp(), arg->philo->timestamp[i], diff);
-		pthread_mutex_unlock(&(arg->philo->protect_write));
+		// pthread_mutex_lock(&(arg->philo->protect_write));
+		// printf ("\nphilo %d: %lld - %ld = %lld\n", i + 1, calculate_timestamp(), arg->philo->timestamp[i], diff);
+		// pthread_mutex_unlock(&(arg->philo->protect_write));
 		if (diff > arg->philo->time_to_die)
 		{
 			printf("PHILO %d: DIED\n", i + 1);
@@ -125,30 +125,15 @@ void    *supervisor(void *arg)
 	while (!philo->is_dead && !philo->is_done)
 	{
 		check_done(args);
-		check_death(args);
+		// check_death(args);
 	}
 	return (NULL);
 }
-
-// void    *supervisor_2(void *arg)
-// {
-// 	t_args	*args;
-// 	int		philo_id;
-// 	t_philo	*philo;
-
-// 	args = (t_args *)arg;
-// 	philo_id = args->philo_id;
-// 	philo = args->philo;
-// 	while (!philo->is_dead && !philo->is_done)
-// 		check_death(args);
-// 	return (NULL);
-// }
 
 int		create_threads(t_philo *philo)
 {
 	int			i;
 	t_args		*args;
-	// pthread_t			sup_2;
 
 	i = 0;
 	args = NULL;
@@ -161,9 +146,7 @@ int		create_threads(t_philo *philo)
 			return (0);
 		i++;
 	}
-	if (pthread_create(&(philo->sup), NULL, supervisor, (void *)args))
-		exit_error();
-	// if (pthread_create(&(sup_2), NULL, supervisor_2, (void *)args))
+	// if (pthread_create(&(philo->sup), NULL, supervisor, (void *)args))
 	// 	exit_error();
 	i = 0;
 	while(i < philo->np)
@@ -172,9 +155,7 @@ int		create_threads(t_philo *philo)
 			return (0);
 		i++;
 	}
-	if (pthread_join(philo->sup, NULL))
-		return (0);
-	// if (pthread_join(sup_2, NULL))
+	// if (pthread_join(philo->sup, NULL))
 	// 	return (0);
 	return (1);
 }

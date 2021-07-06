@@ -53,22 +53,20 @@ void	take_forks(t_args *data)
 
 	philo_id = data->philo_id;
 	philo = data->philo;
-	// pthread_mutex_lock(&(data->philo->protect_forks));
-	if (philo_id % 2 != 0)
-	{
-		pthread_mutex_lock(&(philo->forks[(philo_id + 1) % 2]));
-		print_state(TAKE_FORK, data);
-
+	pthread_mutex_lock(&(data->philo->mutex));
+	// if (philo_id % 2 != 0)
+	// {
 		pthread_mutex_lock(&(philo->forks[philo_id]));
 		print_state(TAKE_FORK, data);
-	}
-	else
-	{
-		pthread_mutex_lock(&(philo->forks[philo_id]));
-		print_state(TAKE_FORK, data);
-
 		pthread_mutex_lock(&(philo->forks[(philo_id + 1) % 2]));
 		print_state(TAKE_FORK, data);
-	}
-	// pthread_mutex_unlock(&(data->philo->protect_forks));
+	// }
+	// else
+	// {
+	// 	pthread_mutex_lock(&(philo->forks[philo_id]));
+	// 	print_state(TAKE_FORK, data);
+	// 	pthread_mutex_lock(&(philo->forks[(philo_id + 1) % 2]));
+	// 	print_state(TAKE_FORK, data);
+	// }
+	pthread_mutex_unlock(&(data->philo->mutex));
 }

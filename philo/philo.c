@@ -43,6 +43,9 @@ int	get_args(t_philo *philo, char **args)
 	philo->timestamp = (long*)malloc(philo->np * sizeof(long));
 	if (philo->timestamp == NULL)
 		return (0);
+	philo->death_time = (long*)malloc(philo->np * sizeof(long));
+	if (philo->death_time == NULL)
+		return (0);
 	return (1);
 }
 
@@ -54,11 +57,12 @@ int		init_mutexes(t_philo *philo)
 	while (i < philo->np)
 	{
 		philo->timestamp[i] = calculate_timestamp();
+		philo->death_time[i] = calculate_timestamp();
 		pthread_mutex_init(&(philo->is_eating[i]), NULL);
 		pthread_mutex_init(&(philo->forks[i]), NULL);
 		i++;
 	}
-	// pthread_mutex_init(&(philo->protect_forks), NULL);
+	pthread_mutex_init(&(philo->mutex), NULL);
 	pthread_mutex_init(&(philo->protect_write), NULL);
 	philo->time_start = calculate_timestamp();
 	return (1);
