@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/28 11:05:48 by zqadiri           #+#    #+#              #
-#    Updated: 2021/06/30 20:36:10 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/07/06 09:46:42 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,8 @@ SRCS =	init.c\
 		start_eat.c\
 		go_to_sleep.c\
 		think.c\
+		is_done.c\
+		is_dead.c\
 		philo.c
 
 OBJS = $(SRCS:.c=.o)

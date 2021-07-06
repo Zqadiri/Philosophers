@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 18:54:27 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/30 21:27:52 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/06 10:21:18 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int		init_mutexes(t_philo *philo)
 	i = 0;
 	while (i < philo->np)
 	{
+		philo->times_philo_ate[i] = 0;	
 		philo->timestamp[i] = calculate_timestamp();
 		philo->death_time[i] = calculate_timestamp();
 		pthread_mutex_init(&(philo->is_eating[i]), NULL);

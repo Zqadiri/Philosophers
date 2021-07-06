@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 10:01:56 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/30 21:26:58 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/06 10:53:28 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,20 @@ typedef struct s_args
 	t_philo		*philo;
 }	t_args;
 
-int		init(t_philo *philo);
-void	print_args(t_philo *philo);
+int			init(t_philo *philo);
+void		print_args(t_philo *philo);
 long long	calculate_timestamp(void);
-int		create_threads(t_philo *philo);
-void    *philosopher(void *args);
-void    exit_error(void);
-// int		calculate_timestamp(void);
-void	print_state(int state, t_args *data);
-void	take_forks(t_args *data);
-void	start_eat(t_args *data);
-void	go_to_sleep(t_args *data);
-void	think(t_args *data);
-void	_do(size_t time_to_eat);
+int			create_threads(t_philo *philo);
+void		*philosopher(void *args);
+void		exit_error(void);
+void		print_state(int state, t_args *data);
+void		take_forks(t_args *data);
+void		start_eat(t_args *data);
+void		go_to_sleep(t_args *data);
+void		think(t_args *data);
+void		_do(size_t time_to_eat);
+void		check_death(t_args *arg);
+void		check_done(t_args *arg);
+void		detach_philo(t_args *args);
 
 #endif

@@ -6,21 +6,11 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 12:13:46 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/30 21:11:59 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/06 11:13:05 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "philo.h"
-
-// int	calculate_timestamp(void)
-// {
-//     struct timeval	tv;
-// 	int				timestamp;
-
-// 	gettimeofday(&tv, NULL);
-// 	timestamp = ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
-// 	return (timestamp);	
-// }
 
 void	print_state(int state, t_args *data)
 {
@@ -28,6 +18,11 @@ void	print_state(int state, t_args *data)
 	int now;
 
 	pthread_mutex_lock(&(data->philo->protect_write));
+	if (state == DONE)
+	{
+		printf("\t done \n");
+		exit(EXIT_FAILURE);
+	}
 	now = calculate_timestamp();
 	diff = now - data->philo->time_start;
 	printf("%d", diff);
@@ -41,8 +36,6 @@ void	print_state(int state, t_args *data)
 		printf(" %d is thinking\n", data->philo_id + 1);
 	if (state == DIED)
 		printf(" %d died\n", data->philo_id + 1);
-	if (state == DONE)
-		printf("DONE\n");
 	pthread_mutex_unlock(&(data->philo->protect_write));
 }
 
@@ -54,19 +47,9 @@ void	take_forks(t_args *data)
 	philo_id = data->philo_id;
 	philo = data->philo;
 	pthread_mutex_lock(&(data->philo->mutex));
-	// if (philo_id % 2 != 0)
-	// {
-		pthread_mutex_lock(&(philo->forks[philo_id]));
-		print_state(TAKE_FORK, data);
-		pthread_mutex_lock(&(philo->forks[(philo_id + 1) % 2]));
-		print_state(TAKE_FORK, data);
-	// }
-	// else
-	// {
-	// 	pthread_mutex_lock(&(philo->forks[philo_id]));
-	// 	print_state(TAKE_FORK, data);
-	// 	pthread_mutex_lock(&(philo->forks[(philo_id + 1) % 2]));
-	// 	print_state(TAKE_FORK, data);
-	// }
+	pthread_mutex_lock(&(philo->forks[philo_id]));
+	print_state(TAKE_FORK, data);
+	pthread_mutex_lock(&(philo->forks[(philo_id + 1) % 2]));
+	print_state(TAKE_FORK, data);
 	pthread_mutex_unlock(&(data->philo->mutex));
 }
