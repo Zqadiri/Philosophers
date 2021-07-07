@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 09:43:48 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/06 11:14:01 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/06 17:26:49 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ void	detach_philo(t_args *args)
 	i = 0;
 	while (i < args->philo->np)
 	{
-		pthread_mutex_destroy(&(args->philo->is_eating[i]));
 		pthread_mutex_destroy(&(args->philo->forks[i]));
 		i++;
 	}
+	pthread_mutex_destroy(&(args->philo->is_eating));
 	pthread_mutex_destroy(&(args->philo->mutex));
 	pthread_mutex_destroy(&(args->philo->protect_write));
 }

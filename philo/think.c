@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 20:33:40 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/06/30 20:35:02 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/06 11:31:13 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 
 void    think(t_args *data)
 {
+	if (data->philo->is_done)
+		return ;
 	print_state(THINK, data);
 }   

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 16:55:35 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/06 10:20:14 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/06 15:33:09 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	init(t_philo *philo)
 	philo->time_to_die = 0;
 	philo->time_to_eat = 0;
 	philo->time_to_sleep = 0;
-	// philo->nb_must_eat = -1;
+	philo->eating = 0;
     philo->is_done = 0;
     philo->is_dead = 0;
 	return (1);

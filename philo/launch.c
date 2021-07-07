@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:49:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/06 11:14:18 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/06 17:32:27 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void    exit_error(void)
 {
 	// destroy mutex
 	// detach threads
-	exit(EXIT_FAILURE);
+	exit(15);
 }
 
 void    *supervisor(void *arg)
@@ -48,17 +48,16 @@ void    *supervisor(void *arg)
 	philo_id = args->philo_id;
 	philo = args->philo;
 	while (!philo->is_dead && !philo->is_done)
-	{
 		check_done(args);
-		// check_death(args);
-	}
 	if (philo->is_done)
 	{
 		detach_philo(args);
-		print_state(DONE, args);
+		printf("\t done \n");
+		exit(0);
 	}
 	return(NULL);
 }
+
 
 int		create_threads(t_philo *philo)
 {
@@ -78,6 +77,8 @@ int		create_threads(t_philo *philo)
 	}
 	if (pthread_create(&(philo->sup), NULL, supervisor, (void *)args))
 		exit_error();
+	if (pthread_create(&(philo->sup), NULL, death_supervisor, (void *)args))
+		exit_error();
 	i = 0;
 	while(i < philo->np)
 	{
@@ -86,6 +87,8 @@ int		create_threads(t_philo *philo)
 		i++;
 	}
 	if (pthread_join(philo->sup, NULL))
+		return (0);
+	if (pthread_join(philo->sup_d, NULL))
 		return (0);
 	return (1);
 }

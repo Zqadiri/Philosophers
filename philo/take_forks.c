@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 12:13:46 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/06 11:13:05 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/06 17:21:13 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,9 @@ void	print_state(int state, t_args *data)
 	int	diff;
 	int now;
 
+	if (data->philo->is_done)
+		return ;
 	pthread_mutex_lock(&(data->philo->protect_write));
-	if (state == DONE)
-	{
-		printf("\t done \n");
-		exit(EXIT_FAILURE);
-	}
 	now = calculate_timestamp();
 	diff = now - data->philo->time_start;
 	printf("%d", diff);
@@ -41,11 +38,14 @@ void	print_state(int state, t_args *data)
 
 void	take_forks(t_args *data)
 {
+	// ! mutex forks
 	int		philo_id;
 	t_philo	*philo;
 
 	philo_id = data->philo_id;
 	philo = data->philo;
+	if (data->philo->is_done)
+		return ;
 	pthread_mutex_lock(&(data->philo->mutex));
 	pthread_mutex_lock(&(philo->forks[philo_id]));
 	print_state(TAKE_FORK, data);

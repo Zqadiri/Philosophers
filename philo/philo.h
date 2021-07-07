@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 10:01:56 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/06 10:53:28 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/06 17:31:55 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ typedef struct s_philo
 {
 	int					is_dead;
 	int					is_done;
+	int					eating;
 	pthread_t			*tid;
 	pthread_t			sup;
-	pthread_mutex_t		*is_eating;
+	pthread_mutex_t		is_eating;
 	pthread_mutex_t		*forks;
 	pthread_mutex_t		mutex;
 	pthread_mutex_t		protect_write;		// ! synchronize access to memory
@@ -47,8 +48,9 @@ typedef struct s_philo
 	int					nb_must_eat; 		// ! optional
 	int					*times_philo_ate;
 	long				*timestamp;
-	long				*death_time;
+	long				death_time;
 	int					time_start;
+	pthread_t			sup_d;
 }   t_philo;
 
 typedef struct s_args
@@ -72,5 +74,6 @@ void		_do(size_t time_to_eat);
 void		check_death(t_args *arg);
 void		check_done(t_args *arg);
 void		detach_philo(t_args *args);
+void    	*death_supervisor(void *arg);
 
 #endif

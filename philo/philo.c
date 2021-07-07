@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 18:54:27 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/06 10:21:18 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/06 17:35:48 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,6 @@ int	get_args(t_philo *philo, char **args)
     philo->tid = (pthread_t *)malloc(philo->np * sizeof(pthread_t));
 	if ( philo->tid == NULL)
 		return (0);
-	philo->is_eating = (pthread_mutex_t *)malloc(philo->np * sizeof(pthread_mutex_t));
-	if (philo->is_eating == NULL)
-		return (0);
 	philo->forks = (pthread_mutex_t *)malloc(philo->np * sizeof(pthread_mutex_t));
 	if (philo->forks == NULL)
 		return (0);
@@ -42,9 +39,6 @@ int	get_args(t_philo *philo, char **args)
 	memset(philo->times_philo_ate, 0, philo->np);
 	philo->timestamp = (long*)malloc(philo->np * sizeof(long));
 	if (philo->timestamp == NULL)
-		return (0);
-	philo->death_time = (long*)malloc(philo->np * sizeof(long));
-	if (philo->death_time == NULL)
 		return (0);
 	return (1);
 }
@@ -58,11 +52,10 @@ int		init_mutexes(t_philo *philo)
 	{
 		philo->times_philo_ate[i] = 0;	
 		philo->timestamp[i] = calculate_timestamp();
-		philo->death_time[i] = calculate_timestamp();
-		pthread_mutex_init(&(philo->is_eating[i]), NULL);
 		pthread_mutex_init(&(philo->forks[i]), NULL);
 		i++;
 	}
+	pthread_mutex_init(&(philo->is_eating), NULL);
 	pthread_mutex_init(&(philo->mutex), NULL);
 	pthread_mutex_init(&(philo->protect_write), NULL);
 	philo->time_start = calculate_timestamp();
@@ -86,6 +79,8 @@ int     main(int argc, char *argv[])
     	// print_args(&philo);		
 		if (!create_threads(&philo))
 			exit_error();
+		// pthread_mutex_lock(); // ? death lock
+		// pthread_mutex_unlock();
 	}
 	return (1);
 }
