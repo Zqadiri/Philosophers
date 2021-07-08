@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 10:01:56 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/08 16:53:41 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/08 17:38:10 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,16 @@ long long	calculate_timestamp(void);
 
 
 int			create_threads(t_state *state, t_philo *philo);
-// void		*philosopher(void *args);
+void		*philosopher(void *args);
 void		exit_error(void);
 void		print_state(int state, t_philo *philo);
 void		take_forks(t_philo *philo);
 void		start_eat(t_philo *philo);
 void		go_to_sleep(t_philo *philo);
 void		think(t_philo *philo);
-// void		_do(size_t time_to_eat);
 // void		check_death(t_args *arg);
-// void		check_done(t_args *arg);
-// void		detach_philo(t_args *args);
+void		check_done(t_philo *philo);
+void		detach_philo(t_philo *args);
 void    	*death_supervisor(void *arg);
 
 #endif

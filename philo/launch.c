@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:49:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/08 17:03:19 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/08 17:35:11 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,17 @@ void    exit_error(void)
 
 void    *supervisor(void *arg)
 {
-	t_philo	*args;
-	// int		philo_id;
-	// t_philo	*philo;
+	t_philo	*philo;
 
-	args = (t_philo *)arg;
-	// philo_id = args->philo_id;
-	// philo = args->philo;
-	// while (!philo->is_dead && !philo->is_done)
-	// 	check_done(args);
-	// if (philo->is_done)
-	// {
-	// 	detach_philo(args);
-	// 	printf("\t done \n");
-	// 	exit(0);
-	// }
+	philo = (t_philo *)arg;
+	while (!philo->state->is_dead && !philo->state->is_done)
+		check_done(philo);
+	if (philo->state->is_done)
+	{
+		detach_philo(philo);
+		printf("\t done \n");
+		exit(0);
+	}
 	return(NULL);
 }
 
@@ -71,8 +67,8 @@ int		create_threads(t_state *state, t_philo *philo)
 			return (0);
 		i++;
 	}
-	// if (pthread_create(&(state->sup), NULL, supervisor, (void *)philo))
-	// 	exit_error();
+	if (pthread_create(&(state->sup), NULL, supervisor, (void *)philo))
+		exit_error();
 	// if (pthread_create(&(state->sup_d), NULL, death_supervisor, (void *)philo))
 	// 	exit_error();
 	i = 0;
