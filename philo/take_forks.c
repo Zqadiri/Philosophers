@@ -6,50 +6,68 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 12:13:46 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/06 17:21:13 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/08 16:46:08 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "philo.h"
 
-void	print_state(int state, t_args *data)
+void	print_state(int state, t_philo *philo)
 {
 	int	diff;
 	int now;
 
-	if (data->philo->is_done)
+	if (philo->state->is_done)
 		return ;
-	pthread_mutex_lock(&(data->philo->protect_write));
+	pthread_mutex_lock(&(philo->state->protect_write));
 	now = calculate_timestamp();
-	diff = now - data->philo->time_start;
+	diff = now - philo->state->time_start;
 	printf("%d", diff);
 	if (state == TAKE_FORK)
-		printf(" %d has taken a fork\n", data->philo_id + 1);
+		printf(" %d has taken a fork\n", philo->philo_id + 1);
 	if (state == EAT)
-		printf(" %d is eating\n", data->philo_id + 1);
+		printf(" %d is eating\n", philo->philo_id + 1);
 	if (state == SLEEP)
-		printf(" %d is sleeping\n", data->philo_id + 1);
+		printf(" %d is sleeping\n", philo->philo_id + 1);
 	if (state == THINK)
-		printf(" %d is thinking\n", data->philo_id + 1);
+		printf(" %d is thinking\n", philo->philo_id + 1);
 	if (state == DIED)
-		printf(" %d died\n", data->philo_id + 1);
-	pthread_mutex_unlock(&(data->philo->protect_write));
+		printf(" %d died\n", philo->philo_id + 1);
+	pthread_mutex_unlock(&(philo->state->protect_write));
 }
 
-void	take_forks(t_args *data)
-{
+// void	take_forks(t_args *data)
+// {
 	// ! mutex forks
-	int		philo_id;
-	t_philo	*philo;
+// 	int		philo_id;
+// 	t_philo	*philo;
 
-	philo_id = data->philo_id;
-	philo = data->philo;
-	if (data->philo->is_done)
-		return ;
-	pthread_mutex_lock(&(data->philo->mutex));
-	pthread_mutex_lock(&(philo->forks[philo_id]));
-	print_state(TAKE_FORK, data);
-	pthread_mutex_lock(&(philo->forks[(philo_id + 1) % 2]));
-	print_state(TAKE_FORK, data);
-	pthread_mutex_unlock(&(data->philo->mutex));
+// 	philo_id = data->philo_id;
+// 	philo = data->philo;
+// 	if (data->philo->is_done)
+// 		return ;
+// 	pthread_mutex_lock(&(data->philo->mutex));
+// 	pthread_mutex_lock(&(philo->forks[philo_id]));
+// 	print_state(TAKE_FORK, data);
+// 	pthread_mutex_lock(&(philo->forks[(philo_id + 1) % 2]));
+// 	print_state(TAKE_FORK, data);
+// 	pthread_mutex_unlock(&(data->philo->mutex));
+// }
+
+void	take_forks(t_philo *philo)
+{
+	if (philo->philo_id % 2 != 0)
+	{
+		pthread_mutex_lock(&(philo->state->forks[(philo->philo_id + 1) % 2]));
+		print_state(TAKE_FORK, philo);
+		pthread_mutex_lock(&(philo->state->forks[philo->philo_id]));
+		print_state(TAKE_FORK, philo);
+	}
+	else
+	{
+		pthread_mutex_lock(&(philo->state->forks[philo->philo_id]));
+		print_state(TAKE_FORK, philo);
+		pthread_mutex_lock(&(philo->state->forks[(philo->philo_id + 1) % 2]));
+		print_state(TAKE_FORK, philo);
+	}
 }

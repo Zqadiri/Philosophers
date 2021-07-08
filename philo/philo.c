@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 18:54:27 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/06 17:35:48 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/08 17:03:39 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,67 +17,58 @@
 
 // ! switch to ft_atoi && ft_memset
 
-int	get_args(t_philo *philo, char **args)
+int	get_args(t_state *state, char **args)
 {
-	philo->np = atoi(args[1]);
-	philo->time_to_die = atoi(args[2]); // ? milli
-	philo->time_to_eat = atoi(args[3]);
-	philo->time_to_sleep = atoi(args[4]);
+	state->np = atoi(args[1]);
+	state->time_to_die = atoi(args[2]); // ? milli
+	state->time_to_eat = atoi(args[3]);
+	state->time_to_sleep = atoi(args[4]);
 	if (args[5] != NULL)
-		philo->nb_must_eat = atoi(args[5]);
+		state->nb_must_eat = atoi(args[5]);
 	else
-		philo->nb_must_eat = -1;
-    philo->tid = (pthread_t *)malloc(philo->np * sizeof(pthread_t));
-	if ( philo->tid == NULL)
-		return (0);
-	philo->forks = (pthread_mutex_t *)malloc(philo->np * sizeof(pthread_mutex_t));
-	if (philo->forks == NULL)
-		return (0);
-	philo->times_philo_ate = (int *)malloc(philo->np * sizeof(int));
-	if (philo->times_philo_ate == NULL)
-		return (0);
-	memset(philo->times_philo_ate, 0, philo->np);
-	philo->timestamp = (long*)malloc(philo->np * sizeof(long));
-	if (philo->timestamp == NULL)
+		state->nb_must_eat = -1;
+	state->time_start = calculate_timestamp();
+	state->is_dead = 0;
+	state->is_done = 0;
+	state->forks = (pthread_mutex_t *)malloc(state->np * sizeof(pthread_mutex_t));
+	if (state->forks == NULL)
 		return (0);
 	return (1);
 }
 
-int		init_mutexes(t_philo *philo)
+int		init_mutexes(t_state *state)
 {
 	int	i;
 
 	i = 0;
-	while (i < philo->np)
+	while (i < state->np)
 	{
-		philo->times_philo_ate[i] = 0;	
-		philo->timestamp[i] = calculate_timestamp();
-		pthread_mutex_init(&(philo->forks[i]), NULL);
+		pthread_mutex_init(&(state->forks[i]), NULL);
 		i++;
 	}
-	pthread_mutex_init(&(philo->is_eating), NULL);
-	pthread_mutex_init(&(philo->mutex), NULL);
-	pthread_mutex_init(&(philo->protect_write), NULL);
-	philo->time_start = calculate_timestamp();
+	pthread_mutex_init(&(state->is_eating), NULL);
+	pthread_mutex_init(&(state->mutex), NULL);
+	pthread_mutex_init(&(state->protect_write), NULL);
 	return (1);
 }
 
 int     main(int argc, char *argv[])
 {
-	t_philo philo;
+	t_philo *philo;
+	t_state *state;
 
 	if (argc < 5 || argc > 6)
 		printf ("Philo takes at least five arguments !\n");
 	else
 	{
-		if (!init(&philo))
+		state = (t_state *)malloc(sizeof(t_state));	
+		if (!get_args(state, argv))
 			return (0);
-		if (!get_args(&philo, argv))
+    	// print_args(state);	
+		philo = malloc(sizeof(t_philo) * state->np);
+		if (!init_mutexes(state))
 			return (0);
-		if (!init_mutexes(&philo))
-			return (0);
-    	// print_args(&philo);		
-		if (!create_threads(&philo))
+		if (!create_threads(state, philo))
 			exit_error();
 		// pthread_mutex_lock(); // ? death lock
 		// pthread_mutex_unlock();

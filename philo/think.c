@@ -6,15 +6,15 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 20:33:40 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/06 11:31:13 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/08 16:52:45 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "philo.h"
 
-void    think(t_args *data)
+void    think(t_philo *philo)
 {
-	if (data->philo->is_done)
+	if (philo->state->is_done)
 		return ;
-	print_state(THINK, data);
+	print_state(THINK, philo);
 }   

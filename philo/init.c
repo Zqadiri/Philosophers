@@ -6,38 +6,25 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 16:55:35 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/06 15:33:09 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/08 16:36:18 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "philo.h"
 
-void	print_args(t_philo *philo)
+void	print_args(t_state *state)
 {
-	printf ("philo->np :%d\n", philo->np);
-	printf ("philo->time_to_die %d\n", philo->time_to_die);
-	printf ("philo->time_to_eat %d\n", philo->time_to_eat);
-	printf ("philo->time_to_sleep %d\n", philo->time_to_sleep);
-	printf ("philo->nb_must_eat %d\n", philo->nb_must_eat);
-	int i = 0;
-	while (i < philo->np)
-	{
-		printf ("%d\n", philo->times_philo_ate[i]);
-		i ++;
-	}
+	printf ("philo->np :%d\n", state->np);
+	printf ("state->time_to_die %d\n", state->time_to_die);
+	printf ("state->time_to_eat %d\n", state->time_to_eat);
+	printf ("state->time_to_sleep %d\n", state->time_to_sleep);
+	printf ("state->nb_must_eat %d\n", state->nb_must_eat);
 }
 
-int	init(t_philo *philo)
+long long	calculate_timestamp(void)
 {
-	philo = malloc(sizeof(t_philo));
-	if (philo == NULL)
-		return (0);
-	philo->np = 0;
-	philo->time_to_die = 0;
-	philo->time_to_eat = 0;
-	philo->time_to_sleep = 0;
-	philo->eating = 0;
-    philo->is_done = 0;
-    philo->is_dead = 0;
-	return (1);
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((((long long) tv.tv_sec) * 1000) + (tv.tv_usec / 1000));
 }
