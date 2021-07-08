@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 09:42:53 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/08 19:39:10 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/08 20:34:35 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	check_death(t_philo	*philo)
 	i = 0;
 	while (i < philo->state->np)
 	{
-		pthread_mutex_lock(&(philo->is_eating));
+		pthread_mutex_lock(&(philo[i].is_eating));
 		diff = calculate_timestamp() - philo[i].last_meal;
 		if (diff > philo->state->time_to_die && !philo[i].eating)
 		{
@@ -30,7 +30,7 @@ void	check_death(t_philo	*philo)
 			philo->state->is_dead = 1;
 			exit(0);
 		}
-		pthread_mutex_unlock(&(philo->is_eating));
+		pthread_mutex_unlock(&(philo[i].is_eating));
 		i++;
 	}
 }
