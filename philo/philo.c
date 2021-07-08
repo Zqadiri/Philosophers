@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 18:54:27 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/08 17:03:39 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/08 20:04:32 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int		init_mutexes(t_state *state)
 		pthread_mutex_init(&(state->forks[i]), NULL);
 		i++;
 	}
-	pthread_mutex_init(&(state->is_eating), NULL);
 	pthread_mutex_init(&(state->mutex), NULL);
 	pthread_mutex_init(&(state->protect_write), NULL);
 	return (1);

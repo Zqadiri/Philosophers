@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:49:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/08 17:35:11 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/08 19:58:00 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void    *philosopher(void *arg)
 {
 	t_philo	*philo;
+	// long	diff;
 
 	philo = (t_philo *)arg;
 	while (1) // ! change the while loop
@@ -56,21 +57,23 @@ int		create_threads(t_state *state, t_philo *philo)
 
 	i = 0;
 	philo = (t_philo *)malloc(sizeof(t_philo) * state->np);
+	state->time_start = calculate_timestamp();
 	while (i < state->np)
 	{
 		philo[i].philo_id = i;
 		philo[i].state = state;
 		philo[i].eating = 0;
-		philo[i].last_meal = 0;
+		philo[i].last_meal = calculate_timestamp();
 		philo[i].times_philo_ate = 0;
+		pthread_mutex_init(&(philo[i].is_eating), NULL);
 		if (pthread_create(&(philo[i].tid), NULL, philosopher, (void *)&philo[i]))
 			return (0);
 		i++;
 	}
 	if (pthread_create(&(state->sup), NULL, supervisor, (void *)philo))
 		exit_error();
-	// if (pthread_create(&(state->sup_d), NULL, death_supervisor, (void *)philo))
-	// 	exit_error();
+	if (pthread_create(&(state->sup_d), NULL, death_supervisor, (void *)philo))
+		exit_error();
 	i = 0;
 	while(i < state->np)
 	{
@@ -78,9 +81,9 @@ int		create_threads(t_state *state, t_philo *philo)
 			return (0);
 		i++;
 	}
-	// if (pthread_join(state->sup, NULL))
-	// 	return (0);
-	// if (pthread_join(state->sup_d, NULL))
-	// 	return (0);
+	if (pthread_join(state->sup, NULL))
+		return (0);
+	if (pthread_join(state->sup_d, NULL))
+		return (0);
 	return (1);
 }

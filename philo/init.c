@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 16:55:35 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/08 16:36:18 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/08 18:58:30 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	print_args(t_state *state)
 	printf ("state->nb_must_eat %d\n", state->nb_must_eat);
 }
 
-long long	calculate_timestamp(void)
+long	calculate_timestamp(void)
 {
 	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
-	return ((((long long) tv.tv_sec) * 1000) + (tv.tv_usec / 1000));
+	return ((((long) tv.tv_sec) * 1000) + (tv.tv_usec / 1000));
 }

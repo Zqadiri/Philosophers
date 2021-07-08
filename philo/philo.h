@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 10:01:56 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/08 17:38:10 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/08 19:22:41 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef	struct s_state
 	//* mutex
 	pthread_mutex_t		*forks;
 	pthread_mutex_t		mutex;
-	pthread_mutex_t		is_eating;
 	pthread_mutex_t		protect_write;		// ! synchronize access to memory
 	// * threads
 	pthread_t			sup;
@@ -56,6 +55,7 @@ typedef struct s_philo
 {
 	// ! optional
 	int					philo_id;
+	pthread_mutex_t		is_eating;
 	int					times_philo_ate;
 	long				last_meal;
 	int					eating;
@@ -65,7 +65,7 @@ typedef struct s_philo
 
 int			init(t_philo *philo);
 void		print_args(t_state *state);
-long long	calculate_timestamp(void);
+long 		calculate_timestamp(void);
 
 
 int			create_threads(t_state *state, t_philo *philo);
@@ -76,7 +76,7 @@ void		take_forks(t_philo *philo);
 void		start_eat(t_philo *philo);
 void		go_to_sleep(t_philo *philo);
 void		think(t_philo *philo);
-// void		check_death(t_args *arg);
+void		check_death(t_philo *arg);
 void		check_done(t_philo *philo);
 void		detach_philo(t_philo *args);
 void    	*death_supervisor(void *arg);
