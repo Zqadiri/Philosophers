@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 10:01:56 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/08 19:22:41 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/09 21:46:41 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 typedef	struct s_state
 {
 	//* mutex
+	pthread_mutex_t		someone_is_dead;
 	pthread_mutex_t		*forks;
 	pthread_mutex_t		mutex;
 	pthread_mutex_t		protect_write;		// ! synchronize access to memory
@@ -67,7 +68,7 @@ int			init(t_philo *philo);
 void		print_args(t_state *state);
 long 		calculate_timestamp(void);
 
-
+void		_do(size_t time_to_eat);
 int			create_threads(t_state *state, t_philo *philo);
 void		*philosopher(void *args);
 void		exit_error(void);

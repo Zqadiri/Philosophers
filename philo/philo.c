@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 18:54:27 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/08 20:04:32 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/09 20:55:49 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,13 @@
 int	get_args(t_state *state, char **args)
 {
 	state->np = atoi(args[1]);
+	if (state->np < 0 || state->np > 200)
+		printf("Try a number of philosophers between 0 & 200 *_-\n");
 	state->time_to_die = atoi(args[2]); // ? milli
 	state->time_to_eat = atoi(args[3]);
 	state->time_to_sleep = atoi(args[4]);
+	if (state->time_to_die < 60 || state->time_to_eat < 60 || state->time_to_sleep < 60)
+		printf("[time_to_die] [time_to_sleep] [time_to_eat] prefered to be  > 60ms\n");
 	if (args[5] != NULL)
 		state->nb_must_eat = atoi(args[5]);
 	else
@@ -48,6 +52,7 @@ int		init_mutexes(t_state *state)
 	}
 	pthread_mutex_init(&(state->mutex), NULL);
 	pthread_mutex_init(&(state->protect_write), NULL);
+	pthread_mutex_init(&(state->someone_is_dead), NULL);
 	return (1);
 }
 

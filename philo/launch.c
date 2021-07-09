@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:49:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/08 19:58:00 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/09 10:19:01 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void    *philosopher(void *arg)
 	// long	diff;
 
 	philo = (t_philo *)arg;
-	while (1) // ! change the while loop
+	while (!philo->state->is_dead && !philo->state->is_done) // ! change the while loop
 	{
 		take_forks(philo);
 		start_eat(philo);
@@ -40,7 +40,7 @@ void    *supervisor(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	while (!philo->state->is_dead && !philo->state->is_done)
+	while (!philo->state->is_done)
 		check_done(philo);
 	if (philo->state->is_done)
 	{

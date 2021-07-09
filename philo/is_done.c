@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 09:43:48 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/08 19:23:41 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/09 10:20:01 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	detach_philo(t_philo *args)
 		i++;
 	}
 	pthread_detach(args->state->sup);
+	pthread_detach(args->state->sup_d);
 	i = 0;
 	while (i < args->state->np)
 	{

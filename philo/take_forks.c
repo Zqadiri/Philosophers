@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 12:13:46 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/08 19:39:18 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/09 10:31:34 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	print_state(int state, t_philo *philo)
 	int	diff;
 	int now;
 
-	if (philo->state->is_done)
-		return ;
+	// if (philo->state->is_done || philo->state->is_dead)
+	// 	return ;
 	pthread_mutex_lock(&(philo->state->protect_write));
 	now = calculate_timestamp();
 	diff = now - philo->state->time_start;
@@ -36,21 +36,10 @@ void	print_state(int state, t_philo *philo)
 	pthread_mutex_unlock(&(philo->state->protect_write));
 }
 
-// void	take_forks(t_philo *philo)
-// {
-// 	// ! mutex forks
-// 	// if (data->philo->is_done)
-// 	// 	return ;
-// 	pthread_mutex_lock(&(philo->state->mutex));
-// 	pthread_mutex_lock(&(philo->state->forks[philo->philo_id]));
-// 	print_state(TAKE_FORK, philo);
-// 	pthread_mutex_lock(&(philo->state->forks[(philo->philo_id + 1) % 2]));
-// 	print_state(TAKE_FORK, philo);
-// 	pthread_mutex_unlock(&(philo->state->mutex));
-// }
-
 void	take_forks(t_philo *philo)
 {
+	if (philo->state->is_done || philo->state->is_dead)
+		return ;
 	pthread_mutex_lock(&(philo->state->mutex));
 	if (philo->philo_id % 2 != 0)
 	{
@@ -66,5 +55,6 @@ void	take_forks(t_philo *philo)
 		pthread_mutex_lock(&(philo->state->forks[(philo->philo_id + 1) % 2]));
 		print_state(TAKE_FORK, philo);
 	}
+	pthread_mutex_lock(&(philo->is_eating));
 	pthread_mutex_unlock(&(philo->state->mutex));
 }
