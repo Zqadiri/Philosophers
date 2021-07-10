@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 12:13:46 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/09 10:31:34 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/10 20:03:18 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ void	print_state(int state, t_philo *philo)
 	int	diff;
 	int now;
 
-	// if (philo->state->is_done || philo->state->is_dead)
-	// 	return ;
+	// pthread_mutex_lock(&(philo->state->someone_is_dead));
 	pthread_mutex_lock(&(philo->state->protect_write));
 	now = calculate_timestamp();
 	diff = now - philo->state->time_start;
@@ -33,7 +32,8 @@ void	print_state(int state, t_philo *philo)
 		printf(" %d is thinking\n", philo->philo_id + 1);
 	if (state == DIED)
 		printf(" %d died\n", philo->philo_id + 1);
-	pthread_mutex_unlock(&(philo->state->protect_write));
+	if (state != DIED)
+		pthread_mutex_unlock(&(philo->state->protect_write));
 }
 
 void	take_forks(t_philo *philo)

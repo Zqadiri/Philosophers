@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 09:42:53 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/10 14:49:34 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/10 20:02:24 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	check_death(t_philo	*philo)
 		pthread_mutex_unlock(&(philo[i].is_eating));
 		i++;
 	}
+	return ;
 }
 
 void    *death_supervisor(void *arg)
@@ -42,9 +43,10 @@ void    *death_supervisor(void *arg)
 		check_death(philo);
 	if (philo->state->is_dead)
 	{
-		detach_philo(philo);
+		// detach_philo(philo);
 		print_state(DIED, philo);
 		return (NULL);
+		// exit(0);
 	}
 	return(NULL);
 }

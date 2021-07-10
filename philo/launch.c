@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:49:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/10 16:06:06 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/10 20:01:07 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void    *supervisor(void *arg)
 	{
 		detach_philo(philo);
 		printf("\t done \n");
-		exit(0);
+		return (NULL);
 	}
 	return(NULL);
 }
@@ -86,7 +86,7 @@ int		create_threads(t_state *state, t_philo *philo)
 	// detach_philo(philo);
 	// if (pthread_join(state->sup, NULL))
 	// 	return (0);
-	if (pthread_join(state->sup_d, NULL))
-		return (0);
+	(pthread_join(state->sup_d, NULL));
+		// return (0);
 	return (1);
 }

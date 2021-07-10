@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 18:54:27 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/10 16:06:30 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/10 20:00:17 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,11 @@ int     main(int argc, char *argv[])
 		philo = malloc(sizeof(t_philo) * state->np);
 		if (!init_mutexes(state))
 			return (0);
-		if (!create_threads(state, philo))
-			return(EXIT_SUCCESS);
-			printf ("here\n");
+		create_threads(state, philo);
+			// return(EXIT_SUCCESS);
 		// pthread_mutex_lock(&(state->someone_is_dead)); // ? death lock
 		// pthread_mutex_unlock(&(state->someone_is_dead));
 	}
+	printf ("here\n");
 	return (1);
 }
