@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 09:43:48 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/09 10:20:01 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/10 16:05:44 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,9 @@ void	check_done(t_philo	*philo)
 	{
 		while (!done)
 		{
-            // printf ("philo %d :%d\n", 0, philo[0].times_philo_ate);
-            // printf ("philo %d :%d\n", 1, philo[1].times_philo_ate);
-            // printf ("philo %d :%d\n", 2, philo[2].times_philo_ate);
-            // printf ("philo %d :%d\n", 3, philo[3].times_philo_ate);
-            // printf ("philo %d :%d\n", 4, philo[4].times_philo_ate);
 			usleep(philo->state->time_to_eat * 1000);
 			pthread_mutex_lock(&(philo->state->protect_write));
-			done =	all_philo_are_done(philo);
+			done = all_philo_are_done(philo);
 			pthread_mutex_unlock(&(philo->state->protect_write));
 		}
 	}
