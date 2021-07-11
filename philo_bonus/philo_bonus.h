@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 11:17:06 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/11 20:14:00 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/11 20:37:51 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <errno.h>
 # include <sys/types.h>
 # include <sys/time.h>
+# include <fcntl.h>
+# include <sys/stat.h> 
 
 # define THINK	0
 # define EAT	1
@@ -40,6 +42,9 @@ typedef struct s_state
 	long				time_to_sleep;
 	int					nb_must_eat;
 	long				time_start;
+	sem_t				*forks;
+	sem_t				*eating;
+	sem_t				*write;
 }	t_state;
 
 typedef struct s_philo

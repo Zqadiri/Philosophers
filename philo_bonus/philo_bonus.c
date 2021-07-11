@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 11:16:27 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/11 20:13:41 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/11 21:10:15 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,17 @@ void    launch(t_state *state)
 	}
 }
 
+int		init_sem(t_state *state)
+{
+	sem_unlink("forks");
+	state->forks = sem_open("forks", O_CREAT, 0644, 0);
+	sem_unlink("eating");
+	state->eating = sem_open("eating", O_CREAT, 0644, 0);
+	sem_unlink("write");
+	state->write = sem_open("write", O_CREAT, 0644, 0);
+	return(1);
+}
+
 int main(int argc, char *argv[])
 {
 	t_state *state;
@@ -131,6 +142,8 @@ int main(int argc, char *argv[])
 	{
 		state = (t_state *)malloc(sizeof(t_state));
 		if (!get_args(state, argv))
+			return (0);
+		if (!init_sem(state))
 			return (0);
 		launch(state);
 	}
