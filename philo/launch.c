@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:49:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/11 10:42:54 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/11 18:13:57 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	create_threads(t_state *state, t_philo *philo)
 		philo[i].times_philo_ate = 0;
 		pthread_mutex_init(&(philo[i].is_eating), NULL);
 		pthread_create(&(philo[i].tid), NULL, philosopher, (void *)&philo[i]);
-		pthread_detach(philo[i].tid);
+		// pthread_detach(philo[i].tid);
 		i++;
 	}
 	if (pthread_create(&(state->sup), NULL, supervisor, (void *)philo))

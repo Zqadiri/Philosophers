@@ -3,6 +3,8 @@
 a.out
 main.c
 *.dSYM
+pipex 
+
 # Object files
 *.o
 *.ko
