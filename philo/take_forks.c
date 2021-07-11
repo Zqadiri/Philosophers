@@ -6,18 +6,46 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 12:13:46 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/10 20:03:18 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/11 11:04:32 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "philo.h"
+#include "philo.h"
+
+int	ft_atoi(const char *str)
+{
+	int		signe;
+	long	x;
+
+	signe = 1;
+	x = 0;
+	while (*str != '\0' && (*str == 32 || (*str >= 9 && *str <= 13)))
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			signe = -1;
+		str++;
+	}
+	while (*str != '\0' && *str >= 48 && *str <= 57)
+	{
+		x = (x * 10) + ((char)*str - '0');
+		if (x > 4294967296)
+		{
+			if (signe > 0)
+				return (-1);
+			return (0);
+		}
+		str++;
+	}
+	return (x * signe);
+}
 
 void	print_state(int state, t_philo *philo)
 {
 	int	diff;
-	int now;
+	int	now;
 
-	// pthread_mutex_lock(&(philo->state->someone_is_dead));
 	pthread_mutex_lock(&(philo->state->protect_write));
 	now = calculate_timestamp();
 	diff = now - philo->state->time_start;

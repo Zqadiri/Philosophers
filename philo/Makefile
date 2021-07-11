@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/28 11:05:48 by zqadiri           #+#    #+#              #
-#    Updated: 2021/07/06 09:46:42 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/07/10 20:40:30 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ CC	= gcc
 
 RM = rm -f
 
-CMPL = 	-Wall -Werror -Wextra  -fsanitize=address -g
+CMPL = 	-Wall -Werror -Wextra
 
 SRCS =	init.c\
 		launch.c\

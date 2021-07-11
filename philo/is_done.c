@@ -6,18 +6,18 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 09:43:48 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/10 16:05:44 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/11 10:36:28 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "philo.h"
+#include "philo.h"
 
 void	detach_philo(t_philo *args)
 {
 	int		i;
 
 	i = 0;
-	while(i < args->state->np)
+	while (i < args->state->np)
 	{
 		pthread_detach(args[i].tid);
 		i++;
@@ -54,8 +54,7 @@ void	check_done(t_philo	*philo)
 {
 	int		done;
 
-	done  = 0;
-    // printf ("%d\n", philo->state->nb_must_eat);
+	done = 0;
 	if (philo->state->nb_must_eat != -1)
 	{
 		while (!done)
