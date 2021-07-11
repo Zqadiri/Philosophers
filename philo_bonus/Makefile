@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/11 11:17:15 by zqadiri           #+#    #+#              #
-#    Updated: 2021/07/11 11:17:18 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/07/11 21:41:44 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,9 @@ RM = rm -f
 
 CMPL = 	-Wall -Werror -Wextra
 
-SRCS =	philo_bonus.c
+SRCS =	print_state.c\
+		get_args.c\
+		philo_bonus.c
 
 OBJS = $(SRCS:.c=.o)
 all:   $(NAME)

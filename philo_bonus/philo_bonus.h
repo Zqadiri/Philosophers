@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 11:17:06 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/11 20:37:51 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/11 21:40:19 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,14 @@ typedef struct s_philo
 {
 	int		is_dead;
 	int		is_done;
-	
+	int		philo_id;
+	t_state	*state;
+	long	last_meal;
+	int		times_philo_ate;
 }	t_philo;
+
+long	calculate_timestamp(void);
+void	print_state(int state, t_philo *philo);
+int		get_args(t_state *state, char **args);
 
 #endif
