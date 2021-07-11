@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/10 12:23:56 by zqadiri           #+#    #+#             */
-/*   Updated: 2019/10/24 21:40:27 by zqadiri          ###   ########.fr       */
+/*   Created: 2021/07/11 11:17:06 by zqadiri           #+#    #+#             */
+/*   Updated: 2021/07/11 11:18:09 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef PHILO_BONUS_H
+# define PHILO_BONUS_H
 
-void	ft_bzero(void *s, size_t n)
-{
-	int		i;
-	char	*str;
+# include <unistd.h>
+# include <string.h>
+# include <pthread.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <errno.h>
+# include <sys/time.h>
 
-	i = 0;
-	str = s;
-	while (i < (int)n)
-	{
-		str[i] = 0;
-		i++;
-	}
-}
+
+#endif

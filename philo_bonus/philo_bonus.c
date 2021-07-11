@@ -1,24 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   philo_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zqadiri <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/12 21:59:28 by zqadiri           #+#    #+#             */
-/*   Updated: 2019/10/24 21:52:50 by zqadiri          ###   ########.fr       */
+/*   Created: 2021/07/11 11:16:27 by zqadiri           #+#    #+#             */
+/*   Updated: 2021/07/11 11:16:49 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "philo_bonus.h"
 
-void	*ft_calloc(size_t num, size_t size)
-{
-	void	*p;
-
-	p = malloc(num * size);
-	if (p == NULL)
-		return (NULL);
-	ft_bzero(p, size * num);
-	return (p);
-}
