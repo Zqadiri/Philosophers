@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 16:43:06 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/11 10:34:33 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/18 10:35:17 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 void	go_to_sleep(t_philo *philo)
 {
+	long long	time;
+
 	if (philo->state->is_done)
 		return ;
-	pthread_mutex_unlock(&(philo->state->forks[philo->philo_id]));
-	pthread_mutex_unlock(&(philo->state->forks[(philo->philo_id + 1) % 2]));
 	print_state(SLEEP, philo);
-	_do(philo->state->time_to_sleep * 1000);
+	time = calculate_timestamp();
+	usleep(philo->state->time_to_sleep * 1000 - 10000);
+	while (calculate_timestamp() - time < philo->state->time_to_sleep);
+	return ;
 }

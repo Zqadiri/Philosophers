@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 09:43:48 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/11 10:36:28 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/18 10:31:17 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	check_done(t_philo	*philo)
 	{
 		while (!done)
 		{
-			usleep(philo->state->time_to_eat * 1000);
 			pthread_mutex_lock(&(philo->state->protect_write));
 			done = all_philo_are_done(philo);
 			pthread_mutex_unlock(&(philo->state->protect_write));

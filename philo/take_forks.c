@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 12:13:46 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/11 18:22:43 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/18 10:46:18 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,8 @@ int	ft_atoi(const char *str)
 
 void	print_state(int state, t_philo *philo)
 {
-	int	diff;
-	int	now;
-
 	pthread_mutex_lock(&(philo->state->protect_write));
-	now = calculate_timestamp();
-	diff = now - philo->state->time_start;
-	printf("%d", diff);
+	printf("%lld", calculate_timestamp() - philo->state->time_start);
 	if (state == TAKE_FORK)
 		printf(" %d has taken a fork\n", philo->philo_id + 1);
 	if (state == EAT)
@@ -68,15 +63,9 @@ void	take_forks(t_philo *philo)
 {
 	if (philo->state->is_done || philo->state->is_dead)
 		return ;
-	pthread_mutex_lock(&(philo->state->mutex));
-	if (philo->state->np == 1)
-	{
-		pthread_mutex_lock(&(philo->state->forks[(philo->philo_id)]));
-		print_state(TAKE_FORK, philo);
-	}
 	if (philo->philo_id % 2 != 0)
 	{
-		pthread_mutex_lock(&(philo->state->forks[(philo->philo_id + 1) % 2]));
+		pthread_mutex_lock(&(philo->state->forks[(philo->philo_id + 1) % philo->state->np]));
 		print_state(TAKE_FORK, philo);
 		pthread_mutex_lock(&(philo->state->forks[philo->philo_id]));
 		print_state(TAKE_FORK, philo);
@@ -85,9 +74,8 @@ void	take_forks(t_philo *philo)
 	{
 		pthread_mutex_lock(&(philo->state->forks[philo->philo_id]));
 		print_state(TAKE_FORK, philo);
-		pthread_mutex_lock(&(philo->state->forks[(philo->philo_id + 1) % 2]));
+		pthread_mutex_lock(&(philo->state->forks[(philo->philo_id + 1) % philo->state->np]));
 		print_state(TAKE_FORK, philo);
 	}
 	pthread_mutex_lock(&(philo->is_eating));
-	pthread_mutex_unlock(&(philo->state->mutex));
 }

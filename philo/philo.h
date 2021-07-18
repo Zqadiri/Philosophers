@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 10:01:56 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/11 10:53:18 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/18 10:45:01 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 # define DIED	4
 # define TAKE_FORK 	5
 # define DONE		6
-# define TO_MICRO	1000000
 
 typedef struct s_state
 {
@@ -39,11 +38,11 @@ typedef struct s_state
 	int					is_dead;
 	int					is_done;
 	int					np;
-	long				time_to_die;
-	long				time_to_eat;
-	long				time_to_sleep;
+	long long			time_to_die;
+	long long			time_to_eat;
+	long long			time_to_sleep;
 	int					nb_must_eat;
-	long				time_start;
+	long long			time_start;
 }	t_state;
 
 typedef struct s_philo
@@ -59,8 +58,7 @@ typedef struct s_philo
 
 int			init(t_philo *philo);
 void		print_args(t_state *state);
-long		calculate_timestamp(void);
-void		_do(long time_to_eat);
+long long	calculate_timestamp(void);
 int			create_threads(t_state *state, t_philo *philo);
 void		*philosopher(void *args);
 void		exit_error(void);

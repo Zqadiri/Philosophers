@@ -6,13 +6,13 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 16:55:35 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/11 10:53:02 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/18 10:45:13 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-long	calculate_timestamp(void)
+long long	calculate_timestamp(void)
 {
 	struct timeval	tv;
 
