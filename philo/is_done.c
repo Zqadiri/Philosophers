@@ -6,34 +6,11 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 09:43:48 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/18 10:31:17 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/27 18:22:07 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-void	detach_philo(t_philo *args)
-{
-	int		i;
-
-	i = 0;
-	while (i < args->state->np)
-	{
-		pthread_detach(args[i].tid);
-		i++;
-	}
-	pthread_detach(args->state->sup);
-	pthread_detach(args->state->sup_d);
-	i = 0;
-	while (i < args->state->np)
-	{
-		pthread_mutex_destroy(&(args->state->forks[i]));
-		i++;
-	}
-	pthread_mutex_destroy(&(args->is_eating));
-	pthread_mutex_destroy(&(args->state->mutex));
-	pthread_mutex_destroy(&(args->state->protect_write));
-}
 
 int	all_philo_are_done(t_philo *philo)
 {
@@ -64,4 +41,16 @@ void	check_done(t_philo	*philo)
 			pthread_mutex_unlock(&(philo->state->protect_write));
 		}
 	}
+}
+
+void	*supervisor(void *arg)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *)arg;
+	while (!philo->state->is_done)
+		check_done(philo);
+	if (philo->state->is_done)
+		pthread_mutex_lock(&(philo->state->protect_write));
+	return (NULL);
 }

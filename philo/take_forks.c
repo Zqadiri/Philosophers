@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 12:13:46 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/18 10:46:18 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/27 18:20:40 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ void	take_forks(t_philo *philo)
 		return ;
 	if (philo->philo_id % 2 != 0)
 	{
-		pthread_mutex_lock(&(philo->state->forks[(philo->philo_id + 1) % philo->state->np]));
+		pthread_mutex_lock(&(philo->state->forks[(philo->philo_id + 1)
+				% philo->state->np]));
 		print_state(TAKE_FORK, philo);
 		pthread_mutex_lock(&(philo->state->forks[philo->philo_id]));
 		print_state(TAKE_FORK, philo);
@@ -74,7 +75,8 @@ void	take_forks(t_philo *philo)
 	{
 		pthread_mutex_lock(&(philo->state->forks[philo->philo_id]));
 		print_state(TAKE_FORK, philo);
-		pthread_mutex_lock(&(philo->state->forks[(philo->philo_id + 1) % philo->state->np]));
+		pthread_mutex_lock(&(philo->state->forks[(philo->philo_id + 1)
+				% philo->state->np]));
 		print_state(TAKE_FORK, philo);
 	}
 	pthread_mutex_lock(&(philo->is_eating));

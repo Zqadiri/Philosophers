@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:49:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/18 10:32:15 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/26 12:53:15 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,6 @@ void	*philosopher(void *arg)
 	return (NULL);
 }
 
-void	*supervisor(void *arg)
-{
-	t_philo	*philo;
-	int		i;
-
-	philo = (t_philo *)arg;
-	while (philo->state->nb_must_eat && !philo->state->is_done)
-	{
-		i = 0;
-		while (i < philo->state->np)
-		{
-			if (philo[i].times_philo_ate < philo->state->nb_must_eat)
-			{
-				philo->state->is_done = 1;
-				return (NULL);
-			}		
-			i++;
-		}
-		usleep(100);
-	}
-	return (NULL);
-}
-
 int	create_threads(t_state *state, t_philo *philo)
 {
 	int	i;
@@ -61,9 +38,9 @@ int	create_threads(t_state *state, t_philo *philo)
 	while (i < state->np)
 	{
 		philo[i].philo_id = i;
-		philo[i].state = state;
 		philo[i].eating = 0;
 		philo[i].times_philo_ate = 0;
+		philo[i].state = state;
 		pthread_mutex_init(&(philo[i].is_eating), NULL);
 		pthread_create(&(philo[i].tid), NULL, philosopher, (void *)&philo[i]);
 		usleep(100);

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 10:01:56 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/18 10:45:01 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/26 12:53:12 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ void		go_to_sleep(t_philo *philo);
 void		think(t_philo *philo);
 void		check_death(t_philo *arg);
 void		check_done(t_philo *philo);
-void		detach_philo(t_philo *args);
 void		*death_supervisor(void *arg);
+void		*supervisor(void *arg);
 int			ft_atoi(const char *str);
 
 #endif

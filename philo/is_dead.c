@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 09:42:53 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/18 10:38:37 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/27 18:21:45 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ void	*death_supervisor(void *arg)
 	int		i;
 
 	philo = (t_philo *)arg;
-	while (!philo->state->is_dead)
+	while (!philo->state->is_dead && !philo->state->is_done)
 	{
 		i = 0;
 		while (i < philo->state->np)
 		{
 			if (calculate_timestamp() - philo[i].last_meal
-				>= philo->state->time_to_die && !philo[i].eating)
+				> philo->state->time_to_die && !philo[i].eating)
 			{
 				print_state(DIED, philo);
 				philo->state->is_dead = 1;
