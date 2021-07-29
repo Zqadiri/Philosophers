@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 21:39:53 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/11 21:40:34 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/07/27 19:29:07 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,51 @@ int	ft_atoi(const char *str)
 	return (x * signe);
 }
 
-int	get_args(t_state *state, char **args)
+void	display_state(int state, t_philo *philo)
+{
+	printf("%lld", calculate_timestamp() - philo->state->time_start);
+	if (state == TAKE_FORK)
+		printf(" %d has taken a fork\n", philo->philo_id + 1);
+	if (state == EAT)
+		printf(" %d is eating\n", philo->philo_id + 1);
+	if (state == SLEEP)
+		printf(" %d is sleeping\n", philo->philo_id + 1);
+	if (state == THINK)
+		printf(" %d is thinking\n", philo->philo_id + 1);
+	if (state == DIED)
+		printf(" %d died\n", philo->philo_id + 1);
+}
+
+int	is_valid_args(t_state *state, char *argv[])
+{
+	if (state->np <= 0 || state->np > 200)
+	{
+		printf("Try a number of philosophers between 0 & 200 *_-\n");
+		return (0);
+	}
+	if (state->time_to_die < 60 || state->time_to_eat < 60
+		|| state->time_to_sleep < 60)
+	{
+		printf("[time_to_die][time_to_sleep][time_to_eat] must be > 60ms\n");
+		return (0);
+	}
+	if (state->nb_must_eat <= 0 && argv[5] != NULL)
+	{
+		printf ("[number_of_times_each_philosopher_must_eat] must be > 0\n");
+		return (0);
+	}
+	return (1);
+}
+
+int	store_args(t_state *state, char **args)
 {
 	state->np = ft_atoi(args[1]);
-	if (state->np < 0 || state->np > 200)
-		printf("Try a number of philosophers between 0 & 200 *_-\n");
 	state->time_to_die = ft_atoi(args[2]);
 	state->time_to_eat = ft_atoi(args[3]);
 	state->time_to_sleep = ft_atoi(args[4]);
-	if (state->time_to_die < 60 || state->time_to_eat < 60
-		|| state->time_to_sleep < 60)
-		printf("[time_to_die][time_to_sleep][time_to_eat] must be > 60ms\n");
 	if (args[5] != NULL)
 		state->nb_must_eat = ft_atoi(args[5]);
 	else
 		state->nb_must_eat = -1;
-	state->time_start = calculate_timestamp();
-	state->pid = (pid_t *)malloc(state->np * sizeof(pid_t));
 	return (1);
 }

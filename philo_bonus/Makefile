@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/11 11:17:15 by zqadiri           #+#    #+#              #
-#    Updated: 2021/07/11 21:41:44 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/07/27 19:30:35 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ CC	= gcc
 
 RM = rm -f
 
-CMPL = 	-Wall -Werror -Wextra
+CMPL = 	-Wall -Werror -Wextra -fsanitize=address -g
 
 SRCS =	print_state.c\
 		get_args.c\
