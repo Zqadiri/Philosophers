@@ -48,6 +48,7 @@ typedef struct s_philo
 {
 	int					philo_id;
 	pthread_mutex_t		is_eating;
+	int					eating;
 	int					times_philo_ate;
 	long				last_meal;
 	pthread_t			tid;

@@ -40,9 +40,9 @@ int	create_threads(t_state *state, t_philo *philo)
 		philo[i].philo_id = i;
 		philo[i].times_philo_ate = 0;
 		philo[i].state = state;
+		philo[i].eating = 0;
 		pthread_mutex_init(&(philo[i].is_eating), NULL);
 		pthread_create(&(philo[i].tid), NULL, philosopher, (void *)&philo[i]);
-		usleep(100);
 		i++;
 	}
 	if (pthread_create(&(state->sup), NULL, supervisor, (void *)philo))

@@ -79,5 +79,4 @@ void	take_forks(t_philo *philo)
 				% philo->state->np]));
 		print_state(TAKE_FORK, philo);
 	}
-	pthread_mutex_lock(&(philo->is_eating));
 }
