@@ -6,7 +6,7 @@
 #    By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/28 11:05:48 by zqadiri           #+#    #+#              #
-#    Updated: 2021/07/10 20:40:30 by zqadiri          ###   ########.fr        #
+#    Updated: 2021/10/17 11:30:20 by zqadiri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,8 +31,7 @@ SRCS =	init.c\
 		launch.c\
 		take_forks.c\
 		start_eat.c\
-		go_to_sleep.c\
-		think.c\
+		sleep_think.c\
 		is_done.c\
 		is_dead.c\
 		philo.c
@@ -40,7 +39,7 @@ SRCS =	init.c\
 OBJS = $(SRCS:.c=.o)
 all:   $(NAME)
 
-$(NAME) : $(OBJS)
+$(NAME) : $(SRCS)
 			 @gcc $(CMPL) $(SRCS) -lpthread -o $(NAME)
 			 @echo "${YELLOW}Building philo ...${RESET}"
 

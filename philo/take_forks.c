@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 12:13:46 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/27 19:27:51 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/17 11:59:16 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,15 @@ void	print_state(int state, t_philo *philo)
 		pthread_mutex_unlock(&(philo->state->protect_write));
 }
 
+/*
+	A race condition occurs when two or more threads can access shared data and 
+	they try to change it at the same time. Because the thread scheduling algorithm 
+	can swap between threads at any time, you don't know the order in which 
+	the threads will attempt to access the shared data.
+*/
+
 void	take_forks(t_philo *philo)
 {
-	if (philo->state->is_done || philo->state->is_dead)
-		return ;
 	if (philo->philo_id % 2 != 0)
 	{
 		pthread_mutex_lock(&(philo->state->forks[(philo->philo_id + 1)

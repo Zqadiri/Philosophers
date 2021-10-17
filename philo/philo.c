@@ -6,14 +6,41 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 18:54:27 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/27 18:27:13 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/17 11:54:35 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+int	check_if_digits(char **args)
+{
+	int	i;
+	int	j;
+
+	j = 1;
+	while (args[j])
+	{
+		i = 0;
+		if (args[j][i] == '+')
+			i++;
+		while (args[j][i])
+		{
+			if (args[j][i] < '0' || args[j][i] > '9')
+			{
+				printf ("Numeric arguments required");
+				return (0);
+			}
+			i++;
+		}
+		j++;
+	}
+	return (1);
+}
+
 int	get_args(t_state *state, char **args)
 {
+	if (!(check_if_digits(args)))
+		return (0);
 	state->np = ft_atoi(args[1]);
 	state->time_to_die = ft_atoi(args[2]);
 	state->time_to_eat = ft_atoi(args[3]);

@@ -6,7 +6,7 @@
 /*   By: zqadiri <zqadiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:49:57 by zqadiri           #+#    #+#             */
-/*   Updated: 2021/07/27 18:27:16 by zqadiri          ###   ########.fr       */
+/*   Updated: 2021/10/17 11:54:57 by zqadiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ void	*philosopher(void *arg)
 	}
 	return (NULL);
 }
+
+/*
+	Threads share the code and data segments(static variables and global variables)
+	and the heap, but they don't share the stack.
+*/
 
 int	create_threads(t_state *state, t_philo *philo)
 {
